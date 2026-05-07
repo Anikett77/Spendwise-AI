@@ -342,11 +342,10 @@ export default function AuditPage() {
                   setTeamSize(e.target.value)
                 }
                 placeholder="e.g. 8"
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-blue-500"
+                className="w-full rounded-xl border text-gray-600 border-slate-200 px-4 py-3 outline-none focus:border-blue-500"
               />
             </div>
 
-            {/* Use cases */}
             <div>
               <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-500">
                 Primary use case
