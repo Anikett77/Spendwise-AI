@@ -110,7 +110,7 @@ ${toolSummaries}
 
 Write a professional, specific, honest summary. Mention the biggest savings opportunity by name. If savings are minimal, say so honestly. Do not use phrases like "In conclusion" or "Overall". Be direct. 80-100 words only.`;
 
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -118,7 +118,7 @@ Write a professional, specific, honest summary. Mention the biggest savings oppo
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
-      model: "claude-3-haiku-20240307",
+      model: "~anthropic/claude-haiku-latest",
       max_tokens: 200,
       messages: [{ role: "user", content: prompt }],
     }),
