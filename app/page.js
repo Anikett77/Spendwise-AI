@@ -146,6 +146,95 @@ export default function Home() {
         </div>
       </section>
 
+{/* Mac Browser Mockup */}
+<div className="rounded-2xl mb-15 mx-30 border border-gray-200 overflow-hidden shadow-xl">
+  
+  {/* Mac title bar */}
+  <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 border-b border-gray-200">
+    <div className="flex gap-1.5">
+      <div className="w-3 h-3 rounded-full bg-red-400" />
+      <div className="w-3 h-3 rounded-full bg-yellow-400" />
+      <div className="w-3 h-3 rounded-full bg-green-400" />
+    </div>
+    <div className="flex-1 mx-4 h-6 rounded-md bg-white border border-gray-200 max-w-xs flex items-center px-3 gap-1.5">
+      <svg width="10" height="10" fill="none" stroke="#9ca3af" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5a6 6 0 11-12 0 6 6 0 0112 0zm4.5 9l-3.75-3.75"/>
+      </svg>
+      <span className="text-xs text-gray-400">spendwiseai.com/results/7ef5ef51</span>
+    </div>
+  </div>
+
+  {/* Dashboard content */}
+  <div className="flex bg-white min-h-80">
+
+    {/* Sidebar */}
+    <div className="w-44 border-r border-gray-100 p-4 flex flex-col gap-1">
+      <div className="flex items-center gap-2 px-2 py-1.5 mb-3">
+        <div className="w-5 h-5 rounded-md bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">S</div>
+        <span className="text-xs font-bold text-slate-900">SpendWise AI</span>
+      </div>
+      {["Results", "Summary", "Breakdown", "Share"].map((item, i) => (
+        <div key={item} className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs ${i === 0 ? "bg-blue-600 text-white font-medium" : "text-gray-400"}`}>
+          <div className={`w-2 h-2 rounded-sm ${i === 0 ? "bg-white/40" : "bg-gray-200"}`} />
+          {item}
+        </div>
+      ))}
+    </div>
+
+    {/* Main content */}
+    <div className="flex-1 p-4 flex flex-col gap-3 bg-slate-50">
+
+      {/* Savings hero */}
+      <div className="rounded-xl bg-slate-900 p-4 text-white">
+        <p className="text-[10px] uppercase tracking-widest text-white/50 mb-1">Potential savings found</p>
+        <div className="flex items-end gap-2">
+          <span className="text-3xl font-black text-yellow-300">$974</span>
+          <span className="text-sm text-white/60 mb-0.5">/month</span>
+        </div>
+        <p className="text-xs text-white/60 mt-0.5">That&apos;s <strong className="text-white">$11,688/year</strong> back in your budget</p>
+      </div>
+
+      {/* Stat cards */}
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { label: "Current spend", val: "$860/mo", color: "text-slate-800" },
+          { label: "Savings found", val: "$974/mo", color: "text-green-600" },
+          { label: "Tools reviewed", val: "3", color: "text-blue-600" },
+        ].map(card => (
+          <div key={card.label} className="rounded-xl p-3 bg-white border border-gray-100">
+            <div className="text-[10px] text-gray-400 mb-1">{card.label}</div>
+            <div className={`text-sm font-bold ${card.color}`}>{card.val}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tool cards */}
+      <div className="flex flex-col gap-2">
+        {[
+          { logo: "⚡", name: "Cursor", plan: "Enterprise · 1 seat", saving: "-$700", status: "Review", statusColor: "bg-amber-100 text-amber-700" },
+          { logo: "✦", name: "Claude", plan: "Pro · 3 seats", saving: null, status: "Optimal", statusColor: "bg-green-100 text-green-700" },
+        ].map(tool => (
+          <div key={tool.name} className="rounded-xl bg-white border border-gray-100 px-3 py-2.5 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-base">{tool.logo}</span>
+              <div>
+                <p className="text-xs font-semibold text-slate-800">{tool.name}</p>
+                <p className="text-[10px] text-gray-400">{tool.plan}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              {tool.saving && <span className="text-sm font-bold text-green-600">{tool.saving}</span>}
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${tool.statusColor}`}>{tool.status}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</div>
+            
+
       {/* Stats */}
       <section className="border-y border-slate-200 bg-white px-6 py-14">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
