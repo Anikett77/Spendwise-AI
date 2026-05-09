@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SpendWise AI — Free AI Tool Spend Audit
 
-## Getting Started
+A free tool that helps startup founders and engineering managers discover where they're overspending on AI tools (Cursor, Claude, ChatGPT, Copilot, Gemini, Windsurf, and more) and get specific, defensible recommendations to reduce spend.
 
-First, run the development server:
+**[Live Demo](https://your-deploy-url.vercel.app)** · Built for [Credex](https://credex.rocks)
+
+## Screenshots
+
+> Add 3+ screenshots or a Loom/YouTube link here after deployment.
+
+## Quick Start
 
 ```bash
+git clone https://github.com/your-username/ai-spend-audit
+cd ai-spend-audit
+npm install
+cp .env.local.example .env.local
+# Fill in your Supabase URL, Supabase Anon Key, and Anthropic API key
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Your Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase anon/public key |
+| `ANTHROPIC_API_KEY` | Yes | For AI-generated summaries |
+| `RESEND_API_KEY` | Optional | For transactional emails |
+| `NEXT_PUBLIC_APP_URL` | Yes | Your deployed URL |
 
-## Learn More
+### Supabase Setup
 
-To learn more about Next.js, take a look at the following resources:
+Run these SQL statements in your Supabase SQL editor:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+create table audits (
+  id uuid primary key,
+  audit_results jsonb,
+  total_monthly_savings numeric,
+  total_annual_savings numeric,
+  total_current_spend numeric,
+  cross_tool_insights jsonb,
+  ai_summary text,
+  use_case text,
+  team_size integer,
+  created_at timestamptz default now()
+);
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+create table leads (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  company text,
+  role text,
+  team_size integer,
+  audit_id uuid,
+  monthly_savings numeric,
+  high_value boolean default false,
+  created_at timestamptz default now()
+);
+```
 
-## Deploy on Vercel
+### Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+vercel --prod
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set environment variables in the Vercel dashboard.
+
+## Decisions
+
+1. **Next.js App Router over Pages Router** — Enables server components for the API routes co-located with pages, easier metadata management for OG tags, and streaming. The app router's `use()` hook makes param handling cleaner in the results page.
+
+2. **Rule-based audit engine, not AI** — The audit math uses hardcoded logic (see `lib/auditEngine.js`). AI is used only for the narrative summary. This ensures the financial reasoning is deterministic, auditable, and fast. An LLM generating "$X savings" with no citation is not trustworthy.
+
+3. **Supabase over a custom Postgres** — Zero-setup for a 7-day build. Row-level security, built-in REST API, and a generous free tier. In production at 10k audits/day, you'd add read replicas and Redis caching.
+
+4. **Inline styles over Tailwind classes in page components** — Given the timeline and the need for complex dynamic styles (conditional colors, animations), inline styles prevented the need to configure `safelist` in Tailwind while maintaining full type safety and zero class-name collisions.
+
+5. **sessionStorage for fresh audits** — After running an audit, the full result is stored in sessionStorage so the results page renders instantly without a DB round trip. The DB is the persistence layer for shared URLs — not the hot path.
