@@ -311,7 +311,7 @@ function LeadCapture({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@company.com"
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500"
+            className="w-full text-gray-500 rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500"
           />
         </div>
 
@@ -325,7 +325,7 @@ function LeadCapture({
             value={company}
             onChange={(e) => setCompany(e.target.value)}
             placeholder="Acme Inc."
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500"
+            className="w-full rounded-xl border text-gray-500 border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500"
           />
         </div>
       </div>
@@ -340,7 +340,7 @@ function LeadCapture({
           value={role}
           onChange={(e) => setRole(e.target.value)}
           placeholder="Founder, CTO..."
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500"
+          className="w-full rounded-xl border text-gray-500 border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500"
         />
       </div>
 
