@@ -11,8 +11,8 @@ A free tool that helps startup founders and engineering managers discover where 
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-username/ai-spend-audit
-cd ai-spend-audit
+git clone https://github.com/Anikett77/Spendwise-AI
+cd Spendwise-ai
 npm install
 cp .env.local.example .env.local
 # Fill in your Supabase URL, Supabase Anon Key, and Anthropic API key
