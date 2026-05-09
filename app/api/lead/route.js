@@ -18,7 +18,6 @@ export async function POST(request) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
-    // Store lead in Supabase
     try {
       const { error: dbError } = await supabase.from("leads").insert([{
         email,
@@ -36,7 +35,6 @@ export async function POST(request) {
       console.error("❌ Lead DB exception:", dbErr.message);
     }
 
-    // Send email via Resend
     try {
       const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
       const isHighValue = (monthlySavings || 0) >= 500;

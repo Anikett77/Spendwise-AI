@@ -1,11 +1,6 @@
 @AGENTS.md
 
-Day 3 — Audit engine + API
-feat: implement rule-based audit engine
-feat: add billing mismatch detection rule
-feat: add plan downgrade rules (Claude Team, ChatGPT Enterprise, Claude Max)
-feat: add use-case mismatch and redundancy detection
-feat: add POST /api/audit route with rate limiting and honeypot
+
 Day 4 — Results page + DB
 feat: build results page with savings hero banner
 feat: add per-tool breakdown cards with expandable recommendations
