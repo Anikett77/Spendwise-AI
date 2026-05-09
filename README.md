@@ -2,7 +2,7 @@
 
 A free tool that helps startup founders and engineering managers discover where they're overspending on AI tools (Cursor, Claude, ChatGPT, Copilot, Gemini, Windsurf, and more) and get specific, defensible recommendations to reduce spend.
 
-**[Live Demo](https://your-deploy-url.vercel.app)** · Built for [Credex](https://credex.rocks)
+**[Live Demo](https://spendwise-ai-five.vercel.app)** · Built for [Credex](https://credex.rocks)
 
 ## Screenshots
 
