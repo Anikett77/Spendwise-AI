@@ -27,3 +27,4 @@ docs: add GTM.md, ECONOMICS.md, METRICS.md, LANDING_COPY.md
 docs: add DEVLOG.md, REFLECTION.md, USER_INTERVIEWS.md
 chore: deploy to Vercel, add production environment variables
 fix: lighthouse accessibility score improvements
+fix: lighthouse accessibility score improvements
